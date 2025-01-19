@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitrah 2025</title>
+    <link rel="stylesheet" href="css/site2.css" />
+    <link rel="stylesheet" href="css/font-awesome.css" />
+    <script src="https://code.highcharts.com/highcharts.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+    <script type="text/javascript" defer>
+        (function () {
+            let countsData = JSON.parse('{"Address" ; "RT 001" , "Count" : "50"}');
+            let pieData = [];
+            countsData.forEach(function (item) {
+                pieData.push({
+                    name:item.Address,
+                    y:item.Count
+                })
+            });
+            Highcharts.chart('container1', {
+                chart: {
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Jumlah Data Per Wilayah'
+                },
+                plotOptions: {
+                    pie:{
+                        minsize:200
+                    }
+                },
+                series: [
+                    {
+                        name: 'Jumlah per wilayah',
+                        colorByPoint: true,
+                        data: pieData 
+                    }
+                ]
+            });
+
+            let quantityData = JSON.parse('{"Date" : "01-02-2025"}, "TotalQuantity": "50"}');
+            let dates = [];
+            let lineQuantityData = [];
+            
+            quantityData.forEach((item)=>{
+                dates.push(item.Date)
+                lineQuantityData.push(item.TotalQuantity)
+            })
+            console.log(dates);
+            console.log(lineQuantityData);
+            Highcharts.chart('container2', {
+                title: {
+                    text: 'Jumlah Jiwa Setiap Hari',
+                    align: 'center'
+                },
+
+                yAxis: {
+                    title: {
+                    text: 'Jumlah Jiwa'
+                    }
+                },
+
+                xAxis: {
+                    categories: dates
+                },
+
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle'
+                },
+
+                series: [{
+                    name: 'Jumlah Jiwa',
+                    data: lineQuantityData
+                }],
+
+                responsive: {
+                    rules: [{
+                    condition: {
+                        maxWidth: 500
+                    },
+                    chartOptions: {
+                        legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                        }
+                    }
+                    }]
+                }
+            });
+        });
+    </script>
+</head>
+<body class="main-body">
+    <header>
+        <div class="account">
+                <h1>FITRAH-MVC</h1>
+        </div>
+        <div class="user-wrapper">
+            <h2></h2>
+            <div class="sign-out">
+                <form method="GET">
+                    <button type="submit" id="logout"> Keluar</button>
+                </form>
+            </div>
+        </div>
+    </header>
+    <div class="nav">
+        <a href="dashboard.html" class="dashboard">
+            <span>Beranda</span>
+        </a>
+        <a href="history.html" class="history">
+            <span>Riwayat</span>
+        </a>
+        <a href="recap.html" class="recap">
+            <span>Rekapitulasi</span>
+        </a>
+    </div>
+    <div class="grid-container dashboard">
+        <div class="container-total">
+            <div class="container-total-data">
+                <h3>50</h3>
+                <span>Data telah masuk</span>
+            </div>
+            <div id="container-total-fitrah">
+                <h3>Total Fitrah</h3>
+                <div class="total-fitrah">
+                    <div class="money">
+                        <img src="assets/money-png-icon-23.jpg" >
+                        <h4>Rp2.000.000.000,00</h4>
+                    </div>
+                    <div class="rice">
+                        <img src="assets/bowl-of-rice-icon-6.jpg" >
+                        <h4>400 Liter</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-graph">
+            <div id="container1" style="width:100%; height:500px;"></div>
+            <div id="container2" style="width:100%; height:500px;"></div>
+        </div>
+    </div>
+
+
+</body>
+</html>
